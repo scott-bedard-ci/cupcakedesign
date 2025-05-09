@@ -1,0 +1,92 @@
+# Component Refactoring Prompt
+
+Refactor the [COMPONENT_NAME] component in the Cupcake design system to improve its quality, maintainability, and adherence to best practices. Focus on the following areas:
+
+## Styling Improvements
+- Remove ALL inline styles (style={{}} attributes) from the component
+- Replace hardcoded color values, spacing, and other visual properties with design tokens
+- Convert any direct CSS or inline styles to Tailwind utility classes that reference tokens
+- Ensure consistent use of design tokens across all variants and states
+- Document any new design tokens that needed to be created during refactoring
+- Verify that the refactored component maintains visual consistency with the original
+
+## Design Token Usage
+- Audit all styling in the component to identify hardcoded values
+- Replace all hardcoded colors with appropriate color tokens
+- Replace all hardcoded spacing values with spacing tokens
+- Replace all hardcoded typography values with typography tokens
+- Replace all hardcoded border, shadow, and animation values with appropriate tokens
+- If necessary, propose new tokens to be added to the design system
+
+## Mobile Optimization
+- Ensure the component is fully responsive across all breakpoints
+- Optimize touch targets for mobile devices (minimum 44×44px)
+- Add touch-specific feedback and interactions
+- Ensure the component works well in both portrait and landscape orientations
+- Optimize performance for mobile devices
+- Add appropriate gesture support if relevant
+
+## Accessibility Improvements
+- Ensure proper semantic HTML elements are used
+- Add or improve ARIA attributes and roles
+- Ensure keyboard navigation works correctly
+- Verify screen reader compatibility
+- Check color contrast ratios
+- Implement focus management for complex interactions
+- Add appropriate error handling and messaging
+
+## Performance Optimization
+- Reduce unnecessary re-renders
+- Optimize event handlers
+- Improve state management
+- Reduce bundle size if possible
+- Optimize animations and transitions
+- Implement code splitting if appropriate
+
+## Code Quality
+- Improve TypeScript types and interfaces
+- Enhance prop validation and default values
+- Refactor complex logic for better readability
+- Add or improve comments and documentation
+- Follow consistent naming conventions
+- Implement proper error handling
+- Remove any deprecated patterns or APIs
+
+## Testing Improvements
+- Add or improve unit tests
+- Add tests for edge cases and error states
+- Implement accessibility testing
+- Add responsive behavior tests
+- Test touch interactions
+- Ensure test coverage is comprehensive
+
+## Documentation Updates
+- Update or create a [ComponentName].docs.txt file with:
+  - Explanation of refactoring changes and rationale
+  - Updated usage guidelines
+  - New props or features added
+  - Accessibility improvements
+  - Mobile optimization details
+  - Performance improvements
+  - Migration guide if breaking changes were made
+
+## Checklist
+Before submitting the refactored component, ensure:
+- [ ] All inline styles have been removed and replaced with design token-based utilities
+- [ ] All hardcoded values (colors, spacing, etc.) have been replaced with tokens
+- [ ] The component is fully responsive and mobile-optimized
+- [ ] Accessibility has been improved and tested
+- [ ] Performance has been optimized
+- [ ] Code quality has been enhanced
+- [ ] Tests have been added or improved
+- [ ] Documentation has been updated
+- [ ] The component maintains visual consistency with the original
+- [ ] No regressions have been introduced
+
+## Deliverables
+1. Refactored component file with improved code quality
+2. Updated or new tests
+3. Updated or new documentation file
+4. List of any new design tokens that were created
+5. Before/after comparison highlighting key improvements
+6. Any recommendations for further improvements that were out of scope

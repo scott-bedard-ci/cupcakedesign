@@ -11,9 +11,18 @@ Please implement the [COMPONENT NAME] for our Cupcake design system based on the
 - Pay special attention to mobile-specific design variations and touch targets
 - Note any responsive behavior changes between breakpoints
 
+### Styling Requirements
+- NEVER use inline styles (style={{}} attribute) in the component
+- ALWAYS use design tokens from the Cupcake design system for all visual properties
+- Use Tailwind utility classes that reference design tokens for all styling
+- All colors, spacing, typography, borders, shadows, and animations must use tokens
+- Ensure consistent styling across all component variants and states
+- If a design token doesn't exist for a needed value, propose adding it to the system
+- Document any new design tokens that need to be created
+
 ### Visual Implementation
 - Implement all visual aspects as shown in the Figma designs
-- Match colors, typography, spacing, and other visual properties exactly
+- Match colors, typography, spacing, and other visual properties exactly using design tokens
 - Ensure consistency with the existing Cupcake design system aesthetics
 - Implement fluid typography and spacing that scales appropriately across device sizes
 - Ensure touch targets are at least 44×44px on mobile devices
@@ -21,6 +30,8 @@ Please implement the [COMPONENT NAME] for our Cupcake design system based on the
 
 ### Technical Specifications
 - Create a TypeScript component with proper type definitions
+- Use ONLY design tokens for all visual styling - no hardcoded values or inline styles
+- Follow the established pattern of using Tailwind classes that reference tokens
 - Ensure the component is fully accessible according to WCAG 2.1 AA standards
 - Implement comprehensive responsive behavior with mobile-first approach
 - Use appropriate CSS techniques (flexbox, grid, container queries) for responsive layouts
@@ -113,6 +124,11 @@ Please implement the [COMPONENT NAME] for our Cupcake design system based on the
      - List components that are often used together with this one
      - Explain relationships to other components in the system
      - Note any component compositions that are particularly effective
+
+  9. **Design Tokens**
+     - Document all design tokens used in the component
+     - Explain any custom token values created for this component
+     - Note any token usage patterns that should be followed
 
 - Format the documentation clearly with headings and bullet points
 - Include code examples where helpful
