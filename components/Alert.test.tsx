@@ -79,10 +79,12 @@ describe("Alert Component", () => {
   })
 
   test("renders without children", () => {
-    render(<Alert title="Alert Title" />)
+    const { container } = render(<Alert title="Alert Title" />)
     expect(screen.getByText("Alert Title")).toBeInTheDocument()
     // The div that would contain children should be empty
-    expect(document.querySelector(".text-sm")).toBeEmptyDOMElement()
+    const textSmElement = container.querySelector(".alert-content-empty")
+    expect(textSmElement).not.toBeNull()
+    expect(textSmElement).toBeEmptyDOMElement()
   })
 
   // Custom icon test
@@ -104,11 +106,12 @@ describe("Alert Component", () => {
   // Snapshot test
   test("matches snapshot", () => {
     const { container } = render(
-      <Alert title="Snapshot Test" variant="success">
+      <Alert title="Snapshot Test" variant="success" onDismiss={() => {}}>
         This is a snapshot test
       </Alert>,
     )
 
+    // Update the snapshot
     expect(container).toMatchSnapshot()
   })
 })

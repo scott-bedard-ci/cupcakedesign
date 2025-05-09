@@ -62,32 +62,35 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     },
     ref,
   ) => {
-    // Map alert variant to styles and icons
-    const variantMap = {
+    // Map alert variant to styles
+    const variantStyles = {
       error: {
-        containerClasses: "border-alert-error bg-alert-error-background text-alert-error-foreground",
-        iconClasses: "text-alert-error",
+        container: "border-alert-error bg-alert-error-background text-alert-error-foreground",
+        icon: "text-alert-error",
         defaultIcon: <AlertCircle className="w-4 h-4 md:w-5 md:h-5" />,
       },
       informational: {
-        containerClasses: "border-alert-info bg-alert-info-background text-alert-info-foreground",
-        iconClasses: "text-alert-info",
+        container: "border-alert-info bg-alert-info-background text-alert-info-foreground",
+        icon: "text-alert-info",
         defaultIcon: <Info className="w-4 h-4 md:w-5 md:h-5" />,
       },
       success: {
-        containerClasses: "border-alert-success bg-alert-success-background text-alert-success-foreground",
-        iconClasses: "text-alert-success",
+        container: "border-alert-success bg-alert-success-background text-alert-success-foreground",
+        icon: "text-alert-success",
         defaultIcon: <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />,
       },
       warning: {
-        containerClasses: "border-alert-warning bg-alert-warning-background text-alert-warning-foreground",
-        iconClasses: "text-alert-warning",
+        container: "border-alert-warning bg-alert-warning-background text-alert-warning-foreground",
+        icon: "text-alert-warning",
         defaultIcon: <AlertTriangle className="w-4 h-4 md:w-5 md:h-5" />,
       },
     }
 
     // Get styles for current variant
-    const currentVariant = variantMap[variant]
+    const currentStyle = variantStyles[variant]
+
+    // Create a text-based close button character for when showIcon is false
+    const closeChar = "×"
 
     return (
       <div
@@ -95,7 +98,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role="alert"
         className={cn(
           "flex items-start border rounded-md p-3 md:p-4",
-          currentVariant.containerClasses,
+          currentStyle.container,
           fill ? "w-full" : "inline-flex",
           className,
         )}
@@ -104,13 +107,15 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         {...props}
       >
         {showIcon && (
-          <div className={cn("flex-shrink-0 mr-2 md:mr-3", currentVariant.iconClasses)}>
-            {icon || currentVariant.defaultIcon}
-          </div>
+          <div className={cn("flex-shrink-0 mr-2 md:mr-3", currentStyle.icon)}>{icon || currentStyle.defaultIcon}</div>
         )}
         <div className="flex-1 min-w-0">
           {title && <h3 className="text-sm md:text-base font-semibold mb-0.5 md:mb-1">{title}</h3>}
-          {children && <div className="text-xs md:text-sm">{children}</div>}
+          {children ? (
+            <div className="text-xs md:text-sm">{children}</div>
+          ) : (
+            <div className="text-sm alert-content-empty"></div>
+          )}
         </div>
         {showClose && (
           <button
@@ -118,7 +123,11 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             className="flex-shrink-0 ml-2 md:ml-3 hover:opacity-70 transition-opacity p-2 rounded-full flex items-center justify-center min-h-touch min-w-touch"
             aria-label="Dismiss alert"
           >
-            <X className="w-4 h-4 md:w-5 md:h-5" />
+            {showIcon ? (
+              <X className="w-4 h-4 md:w-5 md:h-5" />
+            ) : (
+              <span className="w-4 h-4 md:w-5 md:h-5">{closeChar}</span>
+            )}
           </button>
         )}
       </div>

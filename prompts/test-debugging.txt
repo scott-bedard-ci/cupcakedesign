@@ -1,0 +1,39 @@
+# Test Debugging and Fixing Prompt
+
+I ran the tests locally and encountered the following issues:
+
+[PASTE TEST OUTPUT HERE]
+
+Please fix these issues in the while adhering to our established coding standards:
+
+1. Use design tokens instead of hardcoded values
+2. No inline styles - use Tailwind utility classes
+3. Ensure mobile responsiveness with appropriate touch targets
+4. Maintain accessibility standards
+5. Keep the component structure and API consistent with our documentation
+
+The component should pass all tests while maintaining its current functionality and appearance.
+
+## Additional Context (Optional)
+
+### Recent Changes
+[Describe any recent changes to the component that might be relevant]
+
+### Expected Behavior
+[Describe what the component should be doing according to the tests]
+
+### Environment Details
+- Node version: [e.g., 16.x]
+- Browser (if relevant): [e.g., Chrome 98]
+- Device (if relevant): [e.g., iPhone 13, Desktop]
+
+## Debugging Information
+
+### Test File Location
+[Path to the test file]
+
+### Component File Location
+[Path to the component file]
+
+### Related Files
+[Any other files that might be relevant to fixing the issue]

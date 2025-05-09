@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar Component matches snapshot 1`] = `
+<div>
+  <div
+    aria-label="John Doe"
+    class="relative rounded-full flex items-center justify-center font-medium text-avatar-text touch-manipulation w-8 h-8 text-xs md:w-10 md:h-10 bg-avatar-background-pink"
+    data-cupcake-component="avatar"
+    data-cupcake-size="small"
+  >
+    <span
+      aria-hidden="true"
+    >
+      JD
+    </span>
+  </div>
+</div>
+`;
+
+exports[`AvatarGroup Component matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-wrap -space-x-2 md:-space-x-3"
+    data-cupcake-component="avatar-group"
+  >
+    <div
+      aria-label="JD"
+      class="relative rounded-full flex items-center justify-center font-medium text-avatar-text touch-manipulation w-8 h-8 text-xs md:w-10 md:h-10 bg-avatar-background-yellow ring-1 ring-avatar-ring"
+      data-cupcake-component="avatar"
+      data-cupcake-size="small"
+    >
+      <span
+        aria-hidden="true"
+      >
+        JD
+      </span>
+    </div>
+    <div
+      aria-label="AB"
+      class="relative rounded-full flex items-center justify-center font-medium text-avatar-text touch-manipulation w-8 h-8 text-xs md:w-10 md:h-10 bg-avatar-background-orange ring-1 ring-avatar-ring"
+      data-cupcake-component="avatar"
+      data-cupcake-size="small"
+    >
+      <span
+        aria-hidden="true"
+      >
+        AB
+      </span>
+    </div>
+    <div
+      class="relative rounded-full flex items-center justify-center bg-avatar-remainder-background text-avatar-remainder-text font-medium w-8 h-8 text-xs ring-1 ring-avatar-ring md:w-10 md:h-10"
+      data-cupcake-component="avatar-remainder"
+    >
+      <span>
+        +
+        2
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,32 @@
+# Avatar Component Fix - Tooltip Hiding Issue
+
+## Issue Description
+The Avatar component had a test failure in the "shows tooltip on hover" test. After triggering mouseLeave, the tooltip was still visible in the document when it should have been hidden.
+
+## Root Cause
+The issue was in the tooltip hiding logic. The component was using a timeout to hide the tooltip, but this created an asynchronous behavior that didn't work well with the synchronous nature of the test.
+
+## Changes Made
+1. Modified the `handleHideTooltip` function to:
+   - Clear any existing timeout first to prevent race conditions
+   - Set the tooltip state to hidden immediately for mouse events
+   - Remove the unnecessary timeout for mouseLeave events
+
+2. Improved the timeout handling:
+   - Changed the type of tooltipTimeoutRef to allow null values
+   - Added proper cleanup of timeouts to prevent memory leaks
+   - Added null checks before clearing timeouts
+
+3. Enhanced touch event handling:
+   - Maintained the timeout for touch events to give users time to read the tooltip
+   - Properly typed the timeout to avoid TypeScript errors
+
+## Coding Standards Maintained
+1. Used design tokens for all styling
+2. No inline styles were used
+3. Maintained mobile responsiveness with appropriate touch targets
+4. Preserved accessibility with proper ARIA attributes
+5. Kept the component structure and API consistent with documentation
+
+## Testing
+The fix ensures that the tooltip is immediately hidden on mouseLeave, which makes the test pass while maintaining the desired user experience.

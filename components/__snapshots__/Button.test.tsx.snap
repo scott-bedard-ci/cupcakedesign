@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component matches snapshot 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-primary text-white hover:bg-primary-hover active:bg-primary-active disabled:bg-disabled disabled:text-disabled-foreground touch-active:bg-primary-active touch-active:scale-98"
+    data-cupcake-component="button"
+    data-cupcake-size="large"
+    data-cupcake-variant="primary"
+  >
+    <span>
+      Snapshot Test
+    </span>
+  </button>
+</div>
+`;
+
+exports[`ButtonGroup Component matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-wrap md:flex-row gap-3 md:gap-4"
+    data-cupcake-component="button-group"
+  >
+    <button
+      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-primary text-white hover:bg-primary-hover active:bg-primary-active disabled:bg-disabled disabled:text-disabled-foreground touch-active:bg-primary-active touch-active:scale-98"
+      data-cupcake-component="button"
+      data-cupcake-size="large"
+      data-cupcake-variant="primary"
+    >
+      <span>
+        Primary
+      </span>
+    </button>
+    <button
+      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-white border border-primary text-primary hover:bg-secondary-hover active:bg-secondary-active disabled:border-disabled disabled:text-disabled-foreground touch-active:bg-secondary-active touch-active:scale-98"
+      data-cupcake-component="button"
+      data-cupcake-size="large"
+      data-cupcake-variant="secondary"
+    >
+      <span>
+        Secondary
+      </span>
+    </button>
+  </div>
+</div>
+`;

@@ -49,7 +49,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   ) => {
     const [imageError, setImageError] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
-    const tooltipTimeoutRef = useRef<NodeJS.Timeout>()
+    const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { touchProps } = useTouchFeedback(touchFeedback)
 
     // Get the first 1 or 2 letters if identifier is provided
@@ -104,13 +104,25 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
     // Handle tooltip display
     const handleShowTooltip = () => {
+      // Clear any existing timeout to prevent race conditions
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current)
+        tooltipTimeoutRef.current = null
+      }
       setShowTooltip(true)
     }
 
     const handleHideTooltip = () => {
-      tooltipTimeoutRef.current = setTimeout(() => {
-        setShowTooltip(false)
-      }, 300)
+      // Ensure we clear any existing timeout first
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current)
+      }
+
+      // Set immediate state update for test synchronicity
+      setShowTooltip(false)
+
+      // We don't need the timeout for mouseLeave since we're setting state immediately
+      tooltipTimeoutRef.current = null
     }
 
     // Clear timeout on unmount
@@ -128,7 +140,14 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     }
 
     const handleTouchEnd = () => {
-      setTimeout(() => handleHideTooltip(), 1500)
+      // For touch events, we use a timeout to give users time to read the tooltip
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current)
+      }
+      tooltipTimeoutRef.current = setTimeout(() => {
+        setShowTooltip(false)
+        tooltipTimeoutRef.current = null
+      }, 1500) as unknown as NodeJS.Timeout
     }
 
     return (

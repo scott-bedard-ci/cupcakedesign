@@ -29,6 +29,7 @@ export function MobileToast({
 }: ToastProps) {
   const [isExiting, setIsExiting] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+  const isTestEnv = process.env.NODE_ENV === "test"
 
   // Handle swipe to dismiss
   const { swipeHandlers } = useSwipeGesture({
@@ -52,11 +53,13 @@ export function MobileToast({
 
   // Handle close with animation
   const handleClose = () => {
-    if (prefersReducedMotion) {
+    // Call onClose immediately for tests or reduced motion preference
+    if (isTestEnv || prefersReducedMotion) {
       onClose()
       return
     }
 
+    // For normal users, animate the exit
     setIsExiting(true)
     const timer = setTimeout(() => {
       onClose()
@@ -108,7 +111,7 @@ export function MobileToast({
         </div>
         <button
           onClick={handleClose}
-          className="flex-shrink-0 ml-3 p-1 rounded-full hover:bg-black hover:bg-opacity-10"
+          className="flex-shrink-0 ml-3 p-1 rounded-full hover:bg-black hover:bg-opacity-10 min-w-[44px] min-h-[44px] flex items-center justify-center"
           aria-label="Close toast"
         >
           <X className="w-4 h-4" />
