@@ -1,0 +1,46 @@
+.button-primary {
+  background-color: #1046df;
+  color: white;
+}
+
+.button-primary:hover:not(:disabled) {
+  background-color: #0d3ab7;
+}
+
+.button-primary:active:not(:disabled) {
+  background-color: #0a2e92;
+}
+
+.button-secondary {
+  background-color: white;
+  color: #1046df;
+  border: 1px solid #1046df;
+}
+
+.button-secondary:hover:not(:disabled) {
+  background-color: #ebf0ff;
+}
+
+.button-secondary:active:not(:disabled) {
+  background-color: #d1dfff;
+}
+
+.button-tertiary {
+  background-color: white;
+  color: #da1e28;
+  border: 1px solid #da1e28;
+}
+
+.button-tertiary:hover:not(:disabled) {
+  background-color: #fff1f1;
+}
+
+.button-tertiary:active:not(:disabled) {
+  background-color: #ffd7d9;
+}
+
+.button-disabled {
+  background-color: #cccccc;
+  color: #666666;
+  border-color: #cccccc;
+}
