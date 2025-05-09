@@ -1,0 +1,24 @@
+# Component Analysis Prompt
+
+Please analyze the provided design specifications for the [COMPONENT NAME] component in our Cupcake design system. Focus on identifying genuine ambiguities, implementation challenges, and critical gaps in the documentation.
+## Component Overview
+[Brief description of the component and its purpose]
+## Design Specifications Review
+Based on the provided designs, please identify:
+1. **Core Functionality**: What is the primary purpose and behavior of this component?
+2. **Variants and States**: What variants and states are shown in the design? Are there any states that appear to be missing?
+3. **Integration Points**: How does this component interact with other components in the system?
+## Critical Ambiguities
+Please highlight only genuine ambiguities that would make implementation difficult or impossible:
+1. Missing interaction details (e.g., complex animations, state transitions)
+2. Unclear accessibility requirements
+3. Undefined responsive behaviors
+4. Edge cases not addressed in the documentation
+5. Integration challenges with the existing design system
+## Implementation Considerations
+Based on your analysis, what special considerations should be taken into account when implementing this component?
+1. Accessibility requirements
+2. Performance implications
+3. Potential reusability limitations
+4. Browser/device compatibility concerns
+Please do not ask about details that are visibly apparent in the designs or can be reasonably inferred. Focus only on critical information gaps that would prevent successful implementation.

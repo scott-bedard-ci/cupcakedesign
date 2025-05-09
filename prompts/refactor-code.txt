@@ -1,0 +1,93 @@
+# Component Refactoring Prompt
+
+Please analyze the Cupcake design system codebase and perform the following maintenance tasks with particular attention to mobile compatibility and responsive design:
+
+## 1. DRY Refactoring Analysis
+Examine all components and utilities for:
+- Repeated code patterns across components
+- Duplicated styling logic
+- Similar prop interfaces
+- Repeated validation or transformation logic
+- Inconsistent responsive patterns and breakpoint usage
+- Duplicated mobile-specific adaptations
+
+Identify opportunities to:
+- Create shared utility functions
+- Extract common interfaces and types
+- Implement component factories
+- Establish consistent patterns for props, styling, and behavior
+- Create reusable responsive hooks and utilities
+- Standardize mobile interaction patterns
+
+## 2. Component Structure Optimization
+For each component, evaluate:
+- Proper use of React.forwardRef for ref forwarding
+- Consistent naming conventions
+- Appropriate use of TypeScript for type safety
+- Proper separation of concerns
+- Consistent data attribute patterns (data-cupcake-*)
+- Accessibility compliance
+- Touch event handling consistency
+- Mobile-first implementation approach
+- Responsive prop handling
+
+## 3. Styling System Improvements
+Analyze the styling approach for:
+- Consistent use of the color system
+- Proper application of size variants
+- Responsive design patterns
+- Consistent spacing and layout
+- Theme compatibility
+- Mobile-specific styling optimizations
+- Touch target sizing (minimum 44×44px)
+- Fluid typography implementation
+- Viewport-aware styling
+- Orientation change handling
+- Consistent breakpoint usage
+
+## 4. Storybook Documentation Update
+For each component and utility:
+- Ensure Storybook stories exist and are comprehensive
+- Update stories to showcase all variants, states, and sizes
+- Add documentation for props, usage examples, and accessibility considerations
+- Create interactive examples demonstrating component composition
+- Add visual tests using Storybook's snapshot capabilities
+- Add responsive viewports to showcase mobile behavior
+- Document touch interaction patterns
+- Include mobile-specific usage guidelines
+- Add responsive testing utilities to stories
+
+## 5. Testing Coverage
+Verify that:
+- All components have comprehensive unit tests
+- Tests cover all variants, states, and edge cases
+- Shared utilities have dedicated tests
+- Test helpers are used consistently
+- Mobile-specific behaviors are tested
+- Touch interactions are properly tested
+- Responsive behavior is verified at key breakpoints
+- Tests for different viewport sizes exist
+- Performance testing for mobile devices is included
+
+## 6. Mobile Performance Optimization
+Analyze and improve:
+- Component rendering performance on mobile devices
+- Animation and transition efficiency
+- Asset loading and optimization
+- Touch response latency
+- Gesture recognition accuracy
+- Reduced motion support
+- Network-aware component behavior
+- Mobile browser compatibility
+
+## 7. Implementation Plan
+Please provide:
+1. A prioritized list of refactoring opportunities
+2. Code examples for new utilities or shared patterns
+3. Updated component implementations with mobile optimizations
+4. Updated or new Storybook stories with responsive viewports
+5. Updated tests including mobile-specific test cases
+6. Performance benchmarks before and after refactoring
+7. Documentation of mobile-specific improvements
+
+Focus on maintaining backward compatibility while improving the internal structure and ensuring excellent mobile user experience across all device sizes and types.

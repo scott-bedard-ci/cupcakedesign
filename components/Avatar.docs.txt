@@ -1,0 +1,38 @@
+# Avatar Component Documentation
+
+## Purpose
+The Avatar component displays user profile images or initials in a consistent, accessible format. It handles fallbacks gracefully and supports grouping for displaying multiple users.
+
+## Design Decisions
+- We implemented automatic fallback to initials when no image is provided or when the image fails to load.
+- Deterministic background colors are generated based on the user identifier to ensure consistency.
+- Tooltips appear on hover/touch to show the full identifier.
+- The component supports multiple sizes for different contexts.
+- The AvatarGroup subcomponent handles showing multiple avatars efficiently with overlap and count indicators.
+
+## Accessibility Considerations
+- Images have appropriate alt text for screen readers.
+- The component provides sufficient color contrast for text and backgrounds.
+- Interactive behavior is keyboard accessible.
+- Tooltips are properly implemented for screen readers.
+- Touch targets are sized appropriately for mobile use.
+
+## Usage Guidelines
+- Use avatars consistently throughout the application to represent users.
+- Use the small size for lists, comments, or secondary contexts.
+- Use the medium or large size for profile pages or primary user contexts.
+- Use AvatarGroup when displaying multiple users in a compact space.
+- Ensure identifiers are meaningful (usually usernames or emails).
+
+## Evolution History
+- Initial implementation: Basic avatar with image and initials fallback
+- Added deterministic background colors for consistency
+- Implemented tooltip functionality for better information access
+- Created AvatarGroup for showing multiple avatars efficiently
+- Enhanced mobile experience with better touch handling
+- Refactored to use design tokens for consistent styling
+
+## Related Components
+- Badge: Use when indicating status rather than identity
+- UserCard: Use for more detailed user information display
+- ProfilePicture: Use for editable profile image scenarios

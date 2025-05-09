@@ -1,0 +1,14 @@
+# Documentation Generation Prompt
+
+Generate comprehensive documentation for the [COMPONENT_NAME] component in the Cupcake design system. Include the following sections:
+
+1. **Overview**: A brief description of the component and its purpose.
+2. **Props**: A detailed table of all props, their types, default values, and descriptions.
+3. **Examples**: Code examples showing common usage patterns.
+4. **Variants**: Examples of all available variants (if applicable).
+5. **Accessibility**: Accessibility features and considerations.
+6. **Mobile Behavior**: How the component behaves on mobile devices.
+7. **Best Practices**: Guidelines for using the component effectively.
+8. **Related Components**: Other components that are commonly used with this one.
+
+Format the documentation in Markdown suitable for inclusion in the project's documentation system.

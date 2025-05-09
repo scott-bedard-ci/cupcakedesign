@@ -1,0 +1,131 @@
+# Component Creation Prompt
+
+Please implement the [COMPONENT NAME] for our Cupcake design system based on the provided Figma designs. Create a fully functional, accessible, and reusable component that integrates seamlessly with our existing system, with particular attention to mobile compatibility and responsive behavior.
+
+## Component Requirements
+
+### Design Reference
+- Review the provided Figma link(s) for complete visual and functional specifications
+- Extract all necessary information about variants, states, and behaviors from the designs
+- Identify and implement any interaction patterns shown in the Figma prototypes
+- Pay special attention to mobile-specific design variations and touch targets
+- Note any responsive behavior changes between breakpoints
+
+### Visual Implementation
+- Implement all visual aspects as shown in the Figma designs
+- Match colors, typography, spacing, and other visual properties exactly
+- Ensure consistency with the existing Cupcake design system aesthetics
+- Implement fluid typography and spacing that scales appropriately across device sizes
+- Ensure touch targets are at least 44×44px on mobile devices
+- Maintain appropriate contrast ratios at all screen sizes and orientations
+
+### Technical Specifications
+- Create a TypeScript component with proper type definitions
+- Ensure the component is fully accessible according to WCAG 2.1 AA standards
+- Implement comprehensive responsive behavior with mobile-first approach
+- Use appropriate CSS techniques (flexbox, grid, container queries) for responsive layouts
+- Optimize for touch interactions on mobile and tablet devices
+- Handle orientation changes gracefully (portrait/landscape)
+- Follow the existing pattern for component naming and file structure
+
+### Component Features
+- Implement all variants shown in the Figma designs
+- Include all interactive states (default, hover, focus, active, disabled, etc.)
+- Add touch-specific states and feedback for mobile interactions
+- Implement appropriate gesture support where relevant (swipe, pinch, etc.)
+- Handle any edge cases that can be reasonably anticipated
+- Ensure the component works with both mouse and keyboard interactions
+- Ensure the component works with touch interactions and screen readers on mobile
+
+## Integration Requirements
+- Use existing Cupcake design tokens for colors, spacing, and typography
+- Maintain consistency with other Cupcake components in terms of API design
+- Follow the established patterns for component composition and props
+- Integrate with the responsive layout system of the demo site
+- Ensure component behavior is consistent across the breakpoint system
+
+## Testing Requirements
+- Write comprehensive unit tests using React Testing Library and Jest
+- Include tests for all component variants and states
+- Add accessibility tests to ensure ARIA compliance and keyboard navigation
+- Test touch interactions and mobile-specific behaviors
+- Test across multiple viewport sizes using responsive testing utilities
+- Verify performance on mobile devices, especially for animations and transitions
+- Test edge cases and error handling
+- Aim for at least 90% test coverage for the component
+- Include snapshot tests for visual regression testing
+- Add integration tests for components with complex interactions
+- Include device-specific tests for iOS and Android compatibility
+- Document any testing limitations or considerations
+
+## Mobile-Specific Considerations
+- Ensure text remains readable without zooming (minimum 16px font size for body text)
+- Verify that all interactive elements have appropriate touch target sizes
+- Check that the component doesn't cause horizontal overflow on mobile screens
+- Test with different mobile browsers (Safari, Chrome, Firefox)
+- Ensure the component doesn't trigger unwanted mobile behaviors (e.g., pull-to-refresh)
+- Optimize any animations for mobile performance (reduced motion when appropriate)
+- Test with different network conditions to ensure performance on slower connections
+
+## Component Documentation Requirements
+- Create a [ComponentName].docs.txt file alongside the component file
+- Document the following aspects of the component:
+
+  1. **Purpose and Overview**
+     - Explain what the component is used for
+     - Describe its role in the design system
+     - Outline key features and capabilities
+
+  2. **Design Decisions**
+     - Document why specific design choices were made
+     - Explain any trade-offs considered during implementation
+     - Note any deviations from the Figma designs and why they were necessary
+     - Detail the reasoning behind the component's API design
+
+  3. **Accessibility Considerations**
+     - Document ARIA attributes and roles used
+     - Explain keyboard navigation implementation
+     - Describe screen reader behavior and testing results
+     - Note any specific accessibility challenges and solutions
+
+  4. **Mobile and Responsive Behavior**
+     - Detail how the component behaves across different screen sizes
+     - Document touch interaction optimizations
+     - Explain any mobile-specific variants or behaviors
+     - Note performance considerations for mobile devices
+
+  5. **State Management**
+     - Explain how different states are handled (hover, focus, active, disabled)
+     - Document any complex state logic
+     - Detail how errors and edge cases are managed
+
+  6. **Evolution History**
+     - Note the initial implementation date and version
+     - Document any significant changes or refactors
+     - Explain the reasoning behind major changes
+
+  7. **Usage Guidelines**
+     - Provide clear examples of when to use (and not use) this component
+     - Document any known limitations or constraints
+     - Suggest alternatives for scenarios where this component isn't appropriate
+
+  8. **Related Components**
+     - List components that are often used together with this one
+     - Explain relationships to other components in the system
+     - Note any component compositions that are particularly effective
+
+- Format the documentation clearly with headings and bullet points
+- Include code examples where helpful
+- Write in a clear, concise style that will be helpful for future developers
+
+## Deliverables
+1. The component file with proper TypeScript definitions
+2. A comprehensive component documentation file (.docs.txt)
+3. A demo page showcasing all variants and states across multiple device sizes
+4. Comprehensive test suite for the component, including mobile-specific tests
+5. Updated documentation in the README.md with mobile usage guidelines
+6. Any necessary updates to the design tokens or utilities
+7. Responsive testing screenshots showing the component at key breakpoints
+8. Documentation of any mobile-specific behaviors or considerations
+
+If you encounter any significant ambiguities in the Figma designs that prevent implementation, please identify these issues specifically rather than making assumptions that might conflict with the design intent. Pay particular attention to any missing information about responsive behavior or mobile-specific variations.

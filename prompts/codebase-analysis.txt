@@ -1,0 +1,14 @@
+# Codebase Analysis Prompt
+
+Analyze the Cupcake design system codebase with a focus on the following aspects:
+
+1. **Architecture**: Evaluate the overall architecture and organization of the codebase.
+2. **Component Patterns**: Identify common patterns and inconsistencies across components.
+3. **Styling Approach**: Assess the styling approach and use of design tokens.
+4. **Mobile Compatibility**: Evaluate mobile support across the codebase.
+5. **Accessibility**: Assess accessibility features and compliance.
+6. **Performance**: Identify performance concerns and optimization opportunities.
+7. **Testing Coverage**: Evaluate testing coverage and quality.
+8. **Documentation**: Assess documentation quality and completeness.
+
+Provide specific recommendations for improvements in each area, with a prioritized list of action items.

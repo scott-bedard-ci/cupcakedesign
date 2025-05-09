@@ -1,0 +1,33 @@
+# [Component Name] Documentation
+
+## Purpose
+[Brief description of what this component is for and why it exists]
+
+## Design Decisions
+[Explanation of key design decisions and their rationales]
+- Why we chose specific styling approaches
+- Why we structured props a certain way
+- Any performance considerations
+- Mobile-specific considerations
+
+## Accessibility Considerations
+[Details about how accessibility was implemented]
+- Keyboard navigation
+- Screen reader support
+- Color contrast considerations
+- Focus management
+
+## Usage Guidelines
+[When and how to use this component]
+- Recommended use cases
+- Anti-patterns or when not to use
+- Common pitfalls
+
+## Evolution History
+[Brief history of significant changes to the component]
+- Initial implementation details
+- Major refactors and why they happened
+- Future improvement considerations
+
+## Related Components
+[List of related components and when to use one vs the other]
