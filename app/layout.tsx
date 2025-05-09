@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Sweet Bytes Cupcake Shop",
   description: "Delicious cupcakes made with code and love",
   viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
