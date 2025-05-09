@@ -3,13 +3,13 @@
 import React from "react"
 import { X, AlertCircle, Info, CheckCircle, AlertTriangle } from "lucide-react"
 import { cn } from "../lib/utils"
-import type { BaseComponentProps } from "../lib/types"
+import type { DismissableComponentProps } from "../lib/types"
 
 // Alert variants
 export type AlertVariant = "error" | "informational" | "success" | "warning"
 
 // Alert properties
-export interface AlertProps extends BaseComponentProps {
+export interface AlertProps extends DismissableComponentProps {
   /**
    * The title of the alert
    */
@@ -28,11 +28,6 @@ export interface AlertProps extends BaseComponentProps {
    * @default true
    */
   showIcon?: boolean
-  /**
-   * Whether to show the close button
-   * @default true
-   */
-  showClose?: boolean
   /**
    * Callback function when the alert is dismissed
    */
@@ -67,32 +62,32 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     },
     ref,
   ) => {
-    // Map alert variant to styles
-    const variantStyles = {
+    // Map alert variant to styles and icons
+    const variantMap = {
       error: {
-        container: "border-[#da1e28] bg-[#fff1f1] text-[#171717]",
-        icon: "text-[#da1e28]",
+        containerClasses: "border-alert-error bg-alert-error-background text-alert-error-foreground",
+        iconClasses: "text-alert-error",
         defaultIcon: <AlertCircle className="w-4 h-4 md:w-5 md:h-5" />,
       },
       informational: {
-        container: "border-[#0043ce] bg-[#edf5ff] text-[#171717]",
-        icon: "text-[#0043ce]",
+        containerClasses: "border-alert-info bg-alert-info-background text-alert-info-foreground",
+        iconClasses: "text-alert-info",
         defaultIcon: <Info className="w-4 h-4 md:w-5 md:h-5" />,
       },
       success: {
-        container: "border-[#24a148] bg-[#defbe6] text-[#171717]",
-        icon: "text-[#24a148]",
+        containerClasses: "border-alert-success bg-alert-success-background text-alert-success-foreground",
+        iconClasses: "text-alert-success",
         defaultIcon: <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />,
       },
       warning: {
-        container: "border-[#f1c21b] bg-[#fff8e1] text-[#171717]",
-        icon: "text-[#f1c21b]",
+        containerClasses: "border-alert-warning bg-alert-warning-background text-alert-warning-foreground",
+        iconClasses: "text-alert-warning",
         defaultIcon: <AlertTriangle className="w-4 h-4 md:w-5 md:h-5" />,
       },
     }
 
     // Get styles for current variant
-    const currentStyle = variantStyles[variant]
+    const currentVariant = variantMap[variant]
 
     return (
       <div
@@ -100,7 +95,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role="alert"
         className={cn(
           "flex items-start border rounded-md p-3 md:p-4",
-          currentStyle.container,
+          currentVariant.containerClasses,
           fill ? "w-full" : "inline-flex",
           className,
         )}
@@ -108,7 +103,11 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         data-cupcake-variant={variant}
         {...props}
       >
-        {showIcon && <div className="flex-shrink-0 mr-2 md:mr-3">{icon || currentStyle.defaultIcon}</div>}
+        {showIcon && (
+          <div className={cn("flex-shrink-0 mr-2 md:mr-3", currentVariant.iconClasses)}>
+            {icon || currentVariant.defaultIcon}
+          </div>
+        )}
         <div className="flex-1 min-w-0">
           {title && <h3 className="text-sm md:text-base font-semibold mb-0.5 md:mb-1">{title}</h3>}
           {children && <div className="text-xs md:text-sm">{children}</div>}
@@ -116,7 +115,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         {showClose && (
           <button
             onClick={onDismiss}
-            className="flex-shrink-0 ml-2 md:ml-3 hover:opacity-70 transition-opacity"
+            className="flex-shrink-0 ml-2 md:ml-3 hover:opacity-70 transition-opacity p-2 rounded-full flex items-center justify-center min-h-touch min-w-touch"
             aria-label="Dismiss alert"
           >
             <X className="w-4 h-4 md:w-5 md:h-5" />

@@ -1,15 +1,16 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { cn } from "../lib/utils"
 import { getSizeClasses } from "../lib/sizeUtils"
-import type { BaseComponentProps } from "../lib/types"
+import type { SizeableComponentProps, TouchableComponentProps } from "../lib/types"
+import { useTouchFeedback } from "../hooks/useTouchFeedback"
 
 // Define avatar sizes
-export type AvatarSize = "small" | "large"
+export type AvatarSize = "small" | "medium" | "large"
 
 // Define avatar props
-export interface AvatarProps extends BaseComponentProps {
+export interface AvatarProps extends SizeableComponentProps, TouchableComponentProps {
   /**
    * The account name or email to display in the avatar
    */
@@ -33,9 +34,23 @@ export interface AvatarProps extends BaseComponentProps {
  * Cupcake Avatar component for displaying user avatars
  */
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ identifier, src, alt = "Avatar", size = "small", className, "data-testid": dataTestId, ...props }, ref) => {
+  (
+    {
+      identifier,
+      src,
+      alt = "Avatar",
+      size = "small",
+      className,
+      "data-testid": dataTestId,
+      touchFeedback = true,
+      ...props
+    },
+    ref,
+  ) => {
     const [imageError, setImageError] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
+    const tooltipTimeoutRef = useRef<NodeJS.Timeout>()
+    const { touchProps } = useTouchFeedback(touchFeedback)
 
     // Get the first 1 or 2 letters if identifier is provided
     const getInitials = (name: string) => {
@@ -56,16 +71,16 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     const getBackgroundColor = (identifier: string) => {
       // List of avatar background colors for equal distribution
       const colors = [
-        "bg-[#FFD6CC]", // Light red
-        "bg-[#FFE8CC]", // Light orange
-        "bg-[#FFFBCC]", // Light yellow
-        "bg-[#E3FFCC]", // Light lime
-        "bg-[#CCF5FF]", // Light cyan
-        "bg-[#CCD9FF]", // Light blue
-        "bg-[#E5CCFF]", // Light purple
-        "bg-[#FFCCF8]", // Light pink
-        "bg-[#FFCCD6]", // Light rose
-        "bg-[#D1F7C4]", // Light green
+        "bg-avatar-background-red",
+        "bg-avatar-background-orange",
+        "bg-avatar-background-yellow",
+        "bg-avatar-background-lime",
+        "bg-avatar-background-cyan",
+        "bg-avatar-background-blue",
+        "bg-avatar-background-purple",
+        "bg-avatar-background-pink",
+        "bg-avatar-background-rose",
+        "bg-avatar-background-green",
       ]
 
       // Simple hash function to get deterministic index
@@ -80,39 +95,61 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       return colors[hash % colors.length]
     }
 
-    // Size classes - slightly larger for touch targets
-    const sizeClasses = getSizeClasses(size as any, {
-      small: "w-8 h-8 text-xs",
-      medium: "w-10 h-10 text-sm",
-      large: "w-12 h-12 text-base",
+    // Size classes - ensuring touch targets are at least 44x44px on mobile
+    const sizeClasses = getSizeClasses(size, {
+      small: "w-8 h-8 text-xs md:w-10 md:h-10",
+      medium: "w-10 h-10 text-sm md:w-12 md:h-12",
+      large: "w-12 h-12 text-base md:w-14 md:h-14",
     })
 
-    // Handle touch events for mobile
-    const handleTouchStart = () => {
+    // Handle tooltip display
+    const handleShowTooltip = () => {
       setShowTooltip(true)
     }
 
+    const handleHideTooltip = () => {
+      tooltipTimeoutRef.current = setTimeout(() => {
+        setShowTooltip(false)
+      }, 300)
+    }
+
+    // Clear timeout on unmount
+    useEffect(() => {
+      return () => {
+        if (tooltipTimeoutRef.current) {
+          clearTimeout(tooltipTimeoutRef.current)
+        }
+      }
+    }, [])
+
+    // Handle touch events
+    const handleTouchStart = () => {
+      handleShowTooltip()
+    }
+
     const handleTouchEnd = () => {
-      setTimeout(() => setShowTooltip(false), 1500) // Hide tooltip after 1.5s
+      setTimeout(() => handleHideTooltip(), 1500)
     }
 
     return (
       <div
         ref={ref}
         className={cn(
-          "relative rounded-full flex items-center justify-center font-medium text-[#181818]",
+          "relative rounded-full flex items-center justify-center font-medium text-avatar-text",
           "touch-manipulation", // Improves touch response
           sizeClasses,
-          !hasError && identifier ? getBackgroundColor(identifier) : "bg-gray-200",
+          !hasError && identifier ? getBackgroundColor(identifier) : "bg-avatar-background-default",
           className,
         )}
         data-cupcake-component="avatar"
         data-cupcake-size={size}
         data-testid={dataTestId}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onMouseEnter={handleShowTooltip}
+        onMouseLeave={handleHideTooltip}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        aria-label={identifier || alt}
+        {...touchProps}
         {...props}
       >
         {src && !imageError ? (
@@ -123,15 +160,22 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             onError={() => setImageError(true)}
           />
         ) : hasError ? (
-          <span className="text-gray-500">?</span>
+          <span className="text-avatar-placeholder" aria-hidden="true">
+            ?
+          </span>
         ) : letters ? (
-          <span>{letters}</span>
+          <span aria-hidden="true">{letters}</span>
         ) : (
-          <span className="text-gray-500">?</span>
+          <span className="text-avatar-placeholder" aria-hidden="true">
+            ?
+          </span>
         )}
 
         {showTooltip && identifier && (
-          <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10">
+          <div
+            className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-avatar-tooltip-background text-avatar-tooltip-text text-xs rounded py-1 px-2 whitespace-nowrap z-10"
+            role="tooltip"
+          >
             {identifier}
           </div>
         )}
@@ -143,7 +187,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 Avatar.displayName = "Avatar"
 
 // Define avatar group props
-export interface AvatarGroupProps extends BaseComponentProps {
+export interface AvatarGroupProps extends SizeableComponentProps {
   /**
    * The maximum number of avatars to display
    * @default undefined (no limit)
@@ -182,7 +226,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             // Ensure we're only using small avatars in groups
             return React.cloneElement(child as React.ReactElement<AvatarProps>, {
               size: "small",
-              className: cn("ring-1 ring-[#FFFFFF]", (child as React.ReactElement<AvatarProps>).props.className),
+              className: cn("ring-1 ring-avatar-ring", (child as React.ReactElement<AvatarProps>).props.className),
               key: index,
             })
           }
@@ -191,7 +235,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
 
         {showRemainder && (
           <div
-            className="relative rounded-full flex items-center justify-center bg-[#E3E3E3] text-[#181818] font-medium w-8 h-8 text-xs ring-1 ring-[#FFFFFF]"
+            className="relative rounded-full flex items-center justify-center bg-avatar-remainder-background text-avatar-remainder-text font-medium w-8 h-8 text-xs ring-1 ring-avatar-ring md:w-10 md:h-10"
             data-cupcake-component="avatar-remainder"
           >
             <span>+{remainingCount}</span>

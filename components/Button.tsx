@@ -3,13 +3,14 @@
 import React from "react"
 import { cn } from "../lib/utils"
 import { getSizeClasses } from "../lib/sizeUtils"
-import type { SizeableComponentProps } from "../lib/types"
+import type { SizeableComponentProps, TouchableComponentProps } from "../lib/types"
+import { useTouchFeedback } from "../hooks/useTouchFeedback"
 
 // Define button types
 export type ButtonType = "primary" | "secondary" | "tertiary"
 
 // Define button props
-export interface ButtonProps extends SizeableComponentProps {
+export interface ButtonProps extends SizeableComponentProps, TouchableComponentProps {
   /**
    * The type of button
    * @default "primary"
@@ -56,6 +57,7 @@ const ButtonComponent = (
     iconOnly = false,
     className,
     children,
+    touchFeedback = true,
     ...props
   }: ButtonProps,
   ref: React.ForwardedRef<HTMLButtonElement>,
@@ -63,38 +65,51 @@ const ButtonComponent = (
   // Determine if the button should have text
   const hasText = !iconOnly && children
 
-  // Get size classes with touch-friendly adjustments
+  // Use touch feedback hook
+  const { touchProps, touchClass } = useTouchFeedback(touchFeedback && !disabled)
+
+  // Size classes with improved touch targets
   const sizeClasses = getSizeClasses(size, {
-    small: "text-sm py-1.5 px-3 rounded-md",
-    medium: "text-base py-2 px-4 rounded-md",
-    large: "text-base py-2.5 px-5 rounded-md",
+    small: "text-sm py-1.5 px-3 rounded-md min-h-[44px] min-w-[44px]",
+    medium: "text-base py-2 px-4 rounded-md min-h-[44px] min-w-[44px]",
+    large: "text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px]",
   })
 
-  // Direct styling approach instead of using the color system
+  // Variant classes using color tokens from tailwind.config.js
   const variantClasses = {
     primary:
-      "bg-[#1046DF] text-white hover:bg-[#0D3AB7] active:bg-[#0A2E92] disabled:bg-[#CCCCCC] disabled:text-[#666666]",
+      "bg-primary text-white hover:bg-primary-hover active:bg-primary-active disabled:bg-disabled disabled:text-disabled-foreground",
     secondary:
-      "bg-white border border-[#1046DF] text-[#1046DF] hover:bg-[#EBF0FF] active:bg-[#D1DFFF] disabled:border-[#CCCCCC] disabled:text-[#666666]",
+      "bg-white border border-primary text-primary hover:bg-secondary-hover active:bg-secondary-active disabled:border-disabled disabled:text-disabled-foreground",
     tertiary:
-      "bg-white border border-[#da1e28] text-[#da1e28] hover:bg-[#fff1f1] active:bg-[#ffd7d9] disabled:border-[#CCCCCC] disabled:text-[#666666]",
+      "bg-white border border-destructive text-destructive hover:bg-destructive-hover/10 active:bg-destructive-active/20 disabled:border-disabled disabled:text-disabled-foreground",
+  }
+
+  // Touch active styles
+  const touchActiveStyles = {
+    primary: "touch-active:bg-primary-active touch-active:scale-98",
+    secondary: "touch-active:bg-secondary-active touch-active:scale-98",
+    tertiary: "touch-active:bg-destructive-active/20 touch-active:scale-98",
   }
 
   return (
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1046DF]",
+        "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary",
         "touch-manipulation", // Improves touch response
         sizeClasses,
         variantClasses[variant],
+        !disabled && touchActiveStyles[variant],
         iconOnly && "p-2.5", // Slightly larger for touch targets
+        touchClass,
         className,
       )}
       disabled={disabled}
       data-cupcake-component="button"
       data-cupcake-variant={variant}
       data-cupcake-size={size}
+      {...touchProps}
       {...props}
     >
       {leftIcon && <span className={cn("flex-shrink-0", hasText && "mr-2")}>{leftIcon}</span>}
