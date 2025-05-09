@@ -2,8 +2,6 @@
 
 Cupcake is a delightful design system built with TypeScript, React, and Tailwind CSS. It provides a set of reusable components to help maintain consistency and improve user experience across your applications.
 
-![Cupcake Design System]
-
 ## Overview
 
 Cupcake Design System is a comprehensive UI toolkit designed for building modern web applications. It focuses on providing accessible, responsive, and mobile-optimized components with a consistent visual language.
@@ -13,9 +11,9 @@ Cupcake Design System is a comprehensive UI toolkit designed for building modern
 - **React**: UI component library
 - **TypeScript**: Type safety and developer experience
 - **Next.js**: React framework for server-rendered applications
-- **Tailwind CSS**: Utility-first CSS framework
-- **Storybook**: Component documentation and testing
-- **Jest**: Unit and integration testing
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Storybook**: Component documentation and visual testing
+- **Jest**: Unit and integration testing framework
 
 ## Project Structure
 
@@ -23,17 +21,18 @@ The project is organized as follows:
 
 \`\`\`
 cupcake/
-├── app/                  # Next.js application pages
+├── app/                  # Next.js application pages and demos
 ├── components/           # Custom Cupcake components
 │   ├── ui/               # Shadcn UI components (legacy)
 │   └── ...               # Core Cupcake components
 ├── hooks/                # Custom React hooks
 ├── lib/                  # Utility functions and helpers
-├── public/               # Static assets
-└── test/                 # Test utilities
+├── public/               # Static assets and images
+├── test/                 # Test utilities
+└── .storybook/           # Storybook configuration
 \`\`\`
 
-### Component Organization
+## Component Organization
 
 The project currently maintains two component systems:
 
@@ -82,7 +81,7 @@ The Avatar component displays a user's profile image or their initials as a fall
 \`\`\`tsx
 import { Avatar } from '@/components/Avatar';
 
-<Avatar identifier="John Doe" />
+<Avatar identifier="John Doe" size="medium" />
 \`\`\`
 
 ### Button
@@ -121,9 +120,9 @@ A utility for getting size-specific classes.
 import { getSizeClasses } from "@/lib/sizeUtils"
 
 const sizeClasses = getSizeClasses(size, {
-  small: "text-sm",
-  medium: "text-base",
-  large: "text-lg",
+  small: "text-sm py-1.5 px-3",
+  medium: "text-base py-2 px-4",
+  large: "text-lg py-2.5 px-5",
 })
 \`\`\`
 
@@ -170,48 +169,49 @@ Cupcake uses a design token system to maintain consistency:
 
 ## Getting Started
 
-### Installation
+### Local Development
 
-\`\`\`bash
-npm install cupcake-design-system
-# or
-yarn add cupcake-design-system
-\`\`\`
-
-### Usage
-
-Import the components you need from the Cupcake design system:
-
-\`\`\`tsx
-import { Alert, Avatar, Button } from 'cupcake-design-system';
-
-function MyComponent() {
-  return (
-    <div>
-      <Alert 
-        variant="error" 
-        title="Error" 
-        onDismiss={() => console.log("Alert dismissed")}
-      >
-        There was an error processing your request.
-      </Alert>
-      
-      <Avatar identifier="John Doe" />
-      
-      <Button variant="primary">Click Me</Button>
-    </div>
-  );
-}
-\`\`\`
-
-## Development
-
-### Setup
+To work with the Cupcake Design System locally:
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-4. Open Storybook: `npm run storybook`
+   \`\`\`bash
+   git clone https://github.com/your-org/cupcake-design-system.git
+   cd cupcake-design-system
+   \`\`\`
+
+2. Install dependencies
+   \`\`\`bash
+   npm install
+   \`\`\`
+
+3. Start the development server
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+4. Open Storybook to view component documentation
+   \`\`\`bash
+   npm run storybook
+   \`\`\`
+
+### Using in Your Project
+
+This design system is currently for internal use and not yet published as an npm package. To use it in your project:
+
+1. Copy the required components into your project
+2. Ensure you have the necessary dependencies:
+   \`\`\`json
+   {
+     "dependencies": {
+       "react": "^18.2.0",
+       "react-dom": "^18.2.0",
+       "tailwindcss": "^3.3.0",
+       "typescript": "^5.0.0"
+     }
+   }
+   \`\`\`
+
+3. Configure your Tailwind CSS to include the necessary design tokens
 
 ### Testing
 
@@ -219,6 +219,12 @@ Run tests with:
 
 \`\`\`bash
 npm test
+\`\`\`
+
+For visual regression testing:
+
+\`\`\`bash
+npm run test:visual
 \`\`\`
 
 ## Design Principles
@@ -235,7 +241,15 @@ Cupcake is built on the following principles:
 
 ## Contributing
 
-We welcome contributions to the Cupcake design system! Please read our contributing guidelines before submitting a pull request.
+We welcome contributions to the Cupcake design system! To contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure your code follows our coding standards and includes appropriate tests.
 
 ## License
 
