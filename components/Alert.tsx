@@ -1,15 +1,16 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import { X, AlertCircle, Info, CheckCircle, AlertTriangle } from "lucide-react"
 import { cn } from "../lib/utils"
+import { createComponent } from "../lib/createComponent"
 import type { DismissableComponentProps } from "../lib/types"
 
 // Alert variants
 export type AlertVariant = "error" | "informational" | "success" | "warning"
 
 // Alert properties
-export interface AlertProps extends DismissableComponentProps {
+export interface AlertProps extends DismissableComponentProps, React.HTMLAttributes<HTMLDivElement> {
   /**
    * The title of the alert
    */
@@ -29,10 +30,6 @@ export interface AlertProps extends DismissableComponentProps {
    */
   showIcon?: boolean
   /**
-   * Callback function when the alert is dismissed
-   */
-  onDismiss?: () => void
-  /**
    * Custom icon to display in the alert
    */
   icon?: React.ReactNode
@@ -46,7 +43,17 @@ export interface AlertProps extends DismissableComponentProps {
 /**
  * Cupcake Alert component for displaying important messages to users
  */
-export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = createComponent<AlertProps>(
+  {
+    displayName: "Alert",
+    defaultProps: {
+      variant: "error",
+      showIcon: true,
+      showClose: true,
+      fill: true,
+    },
+    dataAttributes: ["variant"],
+  },
   (
     {
       title,
@@ -89,9 +96,6 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     // Get styles for current variant
     const currentStyle = variantStyles[variant]
 
-    // Create a text-based close button character for when showIcon is false
-    const closeChar = "×"
-
     return (
       <div
         ref={ref}
@@ -102,8 +106,6 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
           fill ? "w-full" : "inline-flex",
           className,
         )}
-        data-cupcake-component="alert"
-        data-cupcake-variant={variant}
         {...props}
       >
         {showIcon && (
@@ -123,16 +125,10 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             className="flex-shrink-0 ml-2 md:ml-3 hover:opacity-70 transition-opacity p-2 rounded-full flex items-center justify-center min-h-touch min-w-touch"
             aria-label="Dismiss alert"
           >
-            {showIcon ? (
-              <X className="w-4 h-4 md:w-5 md:h-5" />
-            ) : (
-              <span className="w-4 h-4 md:w-5 md:h-5">{closeChar}</span>
-            )}
+            <X className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         )}
       </div>
     )
   },
 )
-
-Alert.displayName = "Alert"

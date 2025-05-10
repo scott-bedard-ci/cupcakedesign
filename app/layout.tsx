@@ -3,6 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
+import { ResponsiveProvider } from "@/components/ResponsiveProvider"
 
 export const metadata: Metadata = {
   title: "Sweet Bytes Cupcake Shop",
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <ResponsiveProvider>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </ResponsiveProvider>
       </body>
     </html>
   )

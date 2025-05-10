@@ -1,0 +1,11 @@
+PASS components/Avatar.test.tsx
+PASS components/Button.test.tsx
+PASS components/Alert.test.tsx
+PASS components/MobileComponents.test.tsx
+PASS test/responsiveTestUtils.test.tsx
+
+Test Suites: 5 passed, 5 total
+Tests:       42 passed, 42 total
+Snapshots:   5 passed, 5 total
+Time:        3.245s
+Ran all test suites.

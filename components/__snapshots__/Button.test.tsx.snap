@@ -3,7 +3,7 @@
 exports[`Button Component matches snapshot 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-primary text-white hover:bg-primary-hover active:bg-primary-active disabled:bg-disabled disabled:text-disabled-foreground touch-active:bg-primary-active touch-active:scale-98"
+    class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1046DF] touch-manipulation text-base py-2.5 px-5 rounded-md min-h-touch-lg min-w-touch-lg bg-[#1046DF] text-white border border-transparent hover:bg-[#0D3AB7] active:bg-[#0A2E92] disabled:bg-[#CCCCCC] disabled:text-[#666666] disabled:border-transparent"
     data-cupcake-component="button"
     data-cupcake-size="large"
     data-cupcake-variant="primary"
@@ -19,10 +19,10 @@ exports[`ButtonGroup Component matches snapshot 1`] = `
 <div>
   <div
     class="flex flex-wrap md:flex-row gap-3 md:gap-4"
-    data-cupcake-component="button-group"
+    data-cupcake-component="buttongroup"
   >
     <button
-      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-primary text-white hover:bg-primary-hover active:bg-primary-active disabled:bg-disabled disabled:text-disabled-foreground touch-active:bg-primary-active touch-active:scale-98"
+      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1046DF] touch-manipulation text-base py-2.5 px-5 rounded-md min-h-touch-lg min-w-touch-lg bg-[#1046DF] text-white border border-transparent hover:bg-[#0D3AB7] active:bg-[#0A2E92] disabled:bg-[#CCCCCC] disabled:text-[#666666] disabled:border-transparent"
       data-cupcake-component="button"
       data-cupcake-size="large"
       data-cupcake-variant="primary"
@@ -32,7 +32,7 @@ exports[`ButtonGroup Component matches snapshot 1`] = `
       </span>
     </button>
     <button
-      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary touch-manipulation text-base py-2.5 px-5 rounded-md min-h-[48px] min-w-[48px] bg-white border border-primary text-primary hover:bg-secondary-hover active:bg-secondary-active disabled:border-disabled disabled:text-disabled-foreground touch-active:bg-secondary-active touch-active:scale-98"
+      class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1046DF] touch-manipulation text-base py-2.5 px-5 rounded-md min-h-touch-lg min-w-touch-lg bg-white border border-[#1046DF] text-[#1046DF] hover:bg-[#EBF0FF] active:bg-[#EBF0FF]/70 disabled:bg-white disabled:text-[#666666] disabled:border-[#CCCCCC]"
       data-cupcake-component="button"
       data-cupcake-size="large"
       data-cupcake-variant="secondary"

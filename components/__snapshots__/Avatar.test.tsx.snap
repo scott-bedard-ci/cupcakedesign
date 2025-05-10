@@ -21,7 +21,7 @@ exports[`AvatarGroup Component matches snapshot 1`] = `
 <div>
   <div
     class="flex flex-wrap -space-x-2 md:-space-x-3"
-    data-cupcake-component="avatar-group"
+    data-cupcake-component="avatargroup"
   >
     <div
       aria-label="JD"

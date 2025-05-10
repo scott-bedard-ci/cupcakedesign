@@ -1,3 +1,7 @@
+const { motionPlugin, touchPlugin, orientationPlugin } = require("./lib/tailwind-plugins")
+const { colors } = require("./lib/designTokens")
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,32 +12,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Base shadcn colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#1046DF",
-          foreground: "#FFFFFF",
-          hover: "#0D3AB7",
-          active: "#0A2E92",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#1046DF",
-          hover: "#EBF0FF",
-          active: "#D1DFFF",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "#da1e28",
-          foreground: "#FFFFFF",
-          hover: "#b81922",
-          active: "#98151c",
-        },
-        disabled: {
-          DEFAULT: "#cccccc",
-          foreground: "#666666",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -51,189 +46,58 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Alert-specific colors
-        alert: {
-          error: {
-            DEFAULT: "#da1e28",
-            background: "#fff1f1",
-            foreground: "#171717",
-          },
-          info: {
-            DEFAULT: "#0043ce",
-            background: "#edf5ff",
-            foreground: "#171717",
-          },
-          success: {
-            DEFAULT: "#24a148",
-            background: "#defbe6",
-            foreground: "#171717",
-          },
-          warning: {
-            DEFAULT: "#f1c21b",
-            background: "#fff8e1",
-            foreground: "#171717",
-          },
-        },
-        // Avatar-specific colors
-        avatar: {
-          background: {
-            default: "#e5e5e5",
-            red: "#FFD6CC",
-            orange: "#FFE8CC",
-            yellow: "#FFFBCC",
-            lime: "#E3FFCC",
-            cyan: "#CCF5FF",
-            blue: "#CCD9FF",
-            purple: "#E5CCFF",
-            pink: "#FFCCF8",
-            rose: "#FFCCD6",
-            green: "#D1F7C4",
-          },
-          text: "#181818",
-          placeholder: "#6b7280",
-          ring: "#FFFFFF",
-          tooltip: {
-            background: "#1f2937",
-            text: "#FFFFFF",
-          },
-          remainder: {
-            background: "#E3E3E3",
-            text: "#181818",
-          },
-        },
+
+        // Cupcake design system colors
+        "alert-error": colors.error.DEFAULT,
+        "alert-error-background": colors.error.light,
+        "alert-error-foreground": colors.foreground.DEFAULT,
+
+        "alert-info": colors.info.DEFAULT,
+        "alert-info-background": colors.info.light,
+        "alert-info-foreground": colors.foreground.DEFAULT,
+
+        "alert-success": colors.success.DEFAULT,
+        "alert-success-background": colors.success.light,
+        "alert-success-foreground": colors.foreground.DEFAULT,
+
+        "alert-warning": colors.warning.DEFAULT,
+        "alert-warning-background": colors.warning.light,
+        "alert-warning-foreground": colors.foreground.DEFAULT,
+
+        // Avatar colors
+        "avatar-text": colors.avatar.text,
+        "avatar-placeholder": colors.avatar.placeholder,
+        "avatar-ring": colors.avatar.ring,
+        "avatar-tooltip-background": colors.avatar.tooltip.background,
+        "avatar-tooltip-text": colors.avatar.tooltip.text,
+        "avatar-remainder-background": colors.avatar.remainder.background,
+        "avatar-remainder-text": colors.avatar.remainder.text,
+        "avatar-background-default": colors.avatar.background.default,
+        "avatar-background-red": colors.avatar.background.red,
+        "avatar-background-orange": colors.avatar.background.orange,
+        "avatar-background-yellow": colors.avatar.background.yellow,
+        "avatar-background-lime": colors.avatar.background.lime,
+        "avatar-background-cyan": colors.avatar.background.cyan,
+        "avatar-background-blue": colors.avatar.background.blue,
+        "avatar-background-purple": colors.avatar.background.purple,
+        "avatar-background-pink": colors.avatar.background.pink,
+        "avatar-background-rose": colors.avatar.background.rose,
+        "avatar-background-green": colors.avatar.background.green,
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        xl: "0.75rem",
-        "2xl": "1rem",
-        full: "9999px",
       },
-      fontSize: {
-        xs: "0.75rem",
-        sm: "0.875rem",
-        base: "1rem",
-        lg: "1.125rem",
-        xl: "1.25rem",
-        "2xl": "1.5rem",
-      },
-      fontWeight: {
-        normal: "400",
-        medium: "500",
-        semibold: "600",
-        bold: "700",
-      },
-      spacing: {
+      minHeight: {
         touch: "44px",
         "touch-lg": "48px",
-        avatar: {
-          sm: "2rem", // 32px
-          md: "2.5rem", // 40px
-          lg: "3rem", // 48px
-          xl: "3.5rem", // 56px
-        },
       },
-      scale: {
-        98: "0.98",
-      },
-      keyframes: {
-        slideUpAndFade: {
-          from: { opacity: 0, transform: "translateY(10px)" },
-          to: { opacity: 1, transform: "translateY(0)" },
-        },
-        slideDownAndFade: {
-          from: { opacity: 1, transform: "translateY(0)" },
-          to: { opacity: 0, transform: "translateY(10px)" },
-        },
-        slideLeftAndFade: {
-          from: { opacity: 0, transform: "translateX(10px)" },
-          to: { opacity: 1, transform: "translateX(0)" },
-        },
-        slideRightAndFade: {
-          from: { opacity: 0, transform: "translateX(-10px)" },
-          to: { opacity: 1, transform: "translateX(0)" },
-        },
-      },
-      animation: {
-        slideUpAndFade: "slideUpAndFade 200ms ease-out",
-        slideDownAndFade: "slideDownAndFade 200ms ease-out",
-        slideLeftAndFade: "slideLeftAndFade 200ms ease-out",
-        slideRightAndFade: "slideRightAndFade 200ms ease-out",
+      minWidth: {
+        touch: "44px",
+        "touch-lg": "48px",
       },
     },
   },
-  safelist: [
-    // Button-related classes
-    "bg-primary",
-    "text-primary-foreground",
-    "hover:bg-primary-hover",
-    "active:bg-primary-active",
-    "bg-secondary",
-    "text-secondary-foreground",
-    "hover:bg-secondary-hover",
-    "active:bg-secondary-active",
-    "bg-destructive",
-    "text-destructive-foreground",
-    "hover:bg-destructive-hover",
-    "active:bg-destructive-active",
-    "disabled:bg-disabled",
-    "disabled:text-disabled-foreground",
-    "disabled:border-disabled",
-    // Alert-related classes
-    "border-alert-error",
-    "bg-alert-error-background",
-    "text-alert-error-foreground",
-    "text-alert-error",
-    "border-alert-info",
-    "bg-alert-info-background",
-    "text-alert-info-foreground",
-    "text-alert-info",
-    "border-alert-success",
-    "bg-alert-success-background",
-    "text-alert-success-foreground",
-    "text-alert-success",
-    "border-alert-warning",
-    "bg-alert-warning-background",
-    "text-alert-warning-foreground",
-    "text-alert-warning",
-    // Avatar-related classes
-    "bg-avatar-background-default",
-    "bg-avatar-background-red",
-    "bg-avatar-background-orange",
-    "bg-avatar-background-yellow",
-    "bg-avatar-background-lime",
-    "bg-avatar-background-cyan",
-    "bg-avatar-background-blue",
-    "bg-avatar-background-purple",
-    "bg-avatar-background-pink",
-    "bg-avatar-background-rose",
-    "bg-avatar-background-green",
-    "text-avatar-text",
-    "text-avatar-placeholder",
-    "ring-avatar-ring",
-    "bg-avatar-tooltip-background",
-    "text-avatar-tooltip-text",
-    "bg-avatar-remainder-background",
-    "text-avatar-remainder-text",
-    // Touch-related classes
-    "touch-active",
-    "touch-active:bg-primary-active",
-    "touch-active:bg-secondary-active",
-    "touch-active:bg-destructive-active",
-    "touch-active:scale-98",
-    "min-h-[44px]",
-    "min-w-[44px]",
-    "min-h-[48px]",
-    "min-w-[48px]",
-    "translate-y-full",
-    "translate-y-0",
-    "translate-x-full",
-    "translate-x-0",
-    "-translate-x-full",
-    "opacity-0",
-    "opacity-50",
-    "opacity-100",
-  ],
-  plugins: [],
+  plugins: [require("tailwindcss-animate"), motionPlugin, touchPlugin, orientationPlugin],
 }

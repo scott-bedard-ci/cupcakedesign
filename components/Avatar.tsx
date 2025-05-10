@@ -2,15 +2,18 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { cn } from "../lib/utils"
-import { getSizeClasses } from "../lib/sizeUtils"
+import { createComponent } from "../lib/createComponent"
+import { useTouchInteraction } from "../hooks/useTouchInteraction"
 import type { SizeableComponentProps, TouchableComponentProps } from "../lib/types"
-import { useTouchFeedback } from "../hooks/useTouchFeedback"
 
 // Define avatar sizes
 export type AvatarSize = "small" | "medium" | "large"
 
 // Define avatar props
-export interface AvatarProps extends SizeableComponentProps, TouchableComponentProps {
+export interface AvatarProps
+  extends SizeableComponentProps,
+    TouchableComponentProps,
+    React.HTMLAttributes<HTMLDivElement> {
   /**
    * The account name or email to display in the avatar
    */
@@ -23,34 +26,29 @@ export interface AvatarProps extends SizeableComponentProps, TouchableComponentP
    * The alt text for the avatar image
    */
   alt?: string
-  /**
-   * The size of the avatar
-   * @default "small"
-   */
-  size?: AvatarSize
 }
 
 /**
  * Cupcake Avatar component for displaying user avatars
  */
-export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  (
-    {
-      identifier,
-      src,
-      alt = "Avatar",
-      size = "small",
-      className,
-      "data-testid": dataTestId,
-      touchFeedback = true,
-      ...props
+export const Avatar = createComponent<AvatarProps>(
+  {
+    displayName: "Avatar",
+    defaultProps: {
+      size: "small",
+      alt: "Avatar",
+      touchFeedback: true,
     },
-    ref,
-  ) => {
+    dataAttributes: ["size"],
+  },
+  ({ identifier, src, alt = "Avatar", size = "small", className, touchFeedback = true, ...props }, ref) => {
     const [imageError, setImageError] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
     const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-    const { touchProps } = useTouchFeedback(touchFeedback)
+
+    const { touchHandlers } = useTouchInteraction({
+      feedbackEnabled: touchFeedback,
+    })
 
     // Get the first 1 or 2 letters if identifier is provided
     const getInitials = (name: string) => {
@@ -96,11 +94,11 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     }
 
     // Size classes - ensuring touch targets are at least 44x44px on mobile
-    const sizeClasses = getSizeClasses(size, {
+    const sizeClasses = {
       small: "w-8 h-8 text-xs md:w-10 md:h-10",
       medium: "w-10 h-10 text-sm md:w-12 md:h-12",
       large: "w-12 h-12 text-base md:w-14 md:h-14",
-    })
+    }
 
     // Handle tooltip display
     const handleShowTooltip = () => {
@@ -156,19 +154,16 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         className={cn(
           "relative rounded-full flex items-center justify-center font-medium text-avatar-text",
           "touch-manipulation", // Improves touch response
-          sizeClasses,
+          sizeClasses[size],
           !hasError && identifier ? getBackgroundColor(identifier) : "bg-avatar-background-default",
           className,
         )}
-        data-cupcake-component="avatar"
-        data-cupcake-size={size}
-        data-testid={dataTestId}
         onMouseEnter={handleShowTooltip}
         onMouseLeave={handleHideTooltip}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         aria-label={identifier || alt}
-        {...touchProps}
+        {...touchHandlers}
         {...props}
       >
         {src && !imageError ? (
@@ -203,10 +198,8 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   },
 )
 
-Avatar.displayName = "Avatar"
-
 // Define avatar group props
-export interface AvatarGroupProps extends SizeableComponentProps {
+export interface AvatarGroupProps extends SizeableComponentProps, React.HTMLAttributes<HTMLDivElement> {
   /**
    * The maximum number of avatars to display
    * @default undefined (no limit)
@@ -221,8 +214,12 @@ export interface AvatarGroupProps extends SizeableComponentProps {
 /**
  * Cupcake AvatarGroup component for displaying multiple avatars
  */
-export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
-  ({ max, children, className, "data-testid": dataTestId, ...props }, ref) => {
+export const AvatarGroup = createComponent<AvatarGroupProps>(
+  {
+    displayName: "AvatarGroup",
+    dataAttributes: ["component"],
+  },
+  ({ max, children, className, ...props }, ref) => {
     const childrenArray = React.Children.toArray(children)
 
     // Calculate how many avatars to show based on max prop
@@ -233,13 +230,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     const showRemainder = remainingCount > 0
 
     return (
-      <div
-        ref={ref}
-        className={cn("flex flex-wrap -space-x-2 md:-space-x-3", className)}
-        data-cupcake-component="avatar-group"
-        data-testid={dataTestId}
-        {...props}
-      >
+      <div ref={ref} className={cn("flex flex-wrap -space-x-2 md:-space-x-3", className)} {...props}>
         {visibleAvatars.map((child, index) => {
           if (React.isValidElement(child)) {
             // Ensure we're only using small avatars in groups
@@ -264,5 +255,3 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     )
   },
 )
-
-AvatarGroup.displayName = "AvatarGroup"

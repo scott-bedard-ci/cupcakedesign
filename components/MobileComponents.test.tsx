@@ -1,5 +1,4 @@
 "use client"
-
 import { render, screen, fireEvent } from "@testing-library/react"
 import { renderWithViewport } from "../test/responsiveTestUtils"
 import { SwipeableCard } from "./SwipeableCard"
