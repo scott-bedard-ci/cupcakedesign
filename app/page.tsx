@@ -54,41 +54,18 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-[#FFF0F5] pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                Delicious Cupcakes Made with{" "}
-                <span className="text-[#FF69B4]">Love</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-6">
-                Handcrafted cupcakes for every occasion. Made fresh daily with
-                the finest ingredients.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/order">
-                  <Button variant="primary" size="large">
-                    Order Now
-                  </Button>
-                </Link>
-                <Link href="/menu">
-                  <Button variant="secondary" size="large">
-                    View Menu
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div className="md:w-1/2">
-              <img
-                src="/cupcake-display.png"
-                alt="Assorted cupcakes"
-                className="rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Delicious Cupcakes Made with"
+        subtitle="Love"
+        description="Handcrafted cupcakes for every occasion. Made fresh daily with the finest ingredients."
+        primaryButtonText="Order Now"
+        primaryButtonHref="/order"
+        secondaryButtonText="View Menu"
+        secondaryButtonHref="/menu"
+        imageSrc="/cupcake-display.png"
+        imageAlt="Assorted cupcakes"
+        imagePosition="left"
+      />
 
       {/* Featured Cupcakes */}
       <section className="py-16">
