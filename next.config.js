@@ -1,5 +1,3 @@
-const withBuilderDevTools = require("@builder.io/dev-tools/next")();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -11,6 +9,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  webpack: (config, { isServer }) => {
+    // Fix for isolated-vm package issues
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('isolated-vm');
+    }
+    return config;
+  },
 };
 
-module.exports = withBuilderDevTools(nextConfig);
+module.exports = nextConfig;

@@ -1,29 +1,10 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/Button";
 import { CupcakeCard } from "@/components/CupcakeCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { HeroSection } from "@/components/HeroSection";
-import {
-  Content,
-  fetchOneEntry,
-  isPreviewing,
-  isEditing,
-} from "@builder.io/sdk-react";
-import { customComponents } from "../builder-registry";
 
 export default async function Home() {
-  // Add Builder.io initialization
-  const { initializeNodeRuntime } = await import(
-    "@builder.io/sdk-react/node/init"
-  );
-  initializeNodeRuntime();
-
-  // Fetch Builder.io content for homepage
-  const builderContent = await fetchOneEntry({
-    apiKey: process.env.NEXT_PUBLIC_BUILDER_API_KEY!,
-    model: "page",
-    userAttributes: { urlPath: "/" },
-  });
   const featuredCupcakes = [
     {
       id: 1,
@@ -72,15 +53,6 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Builder.io dynamic content */}
-      {(builderContent || isPreviewing() || isEditing()) && (
-        <Content
-          apiKey={process.env.NEXT_PUBLIC_BUILDER_API_KEY!}
-          model="page"
-          content={builderContent}
-          customComponents={customComponents}
-        />
-      )}
       {/* Hero Section */}
       <HeroSection
         title="Delicious Cupcakes Made with"
