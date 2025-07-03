@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { CupcakeCard } from "@/components/CupcakeCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { HeroSection } from "@/components/HeroSection";
+import {
+  Content,
+  fetchOneEntry,
+  isPreviewing,
+  isEditing,
+} from "@builder.io/sdk-react";
+import { customComponents } from "../builder-registry";
 
 export default function Home() {
   const featuredCupcakes = [
