@@ -12,27 +12,18 @@ import {
 import { customComponents } from "../builder-registry";
 
 export default async function Home() {
-  let builderContent = null;
+  // Add Builder.io initialization
+  const { initializeNodeRuntime } = await import(
+    "@builder.io/sdk-react/node/init"
+  );
+  initializeNodeRuntime();
 
-  // Only initialize Builder.io if API key is present
-  if (process.env.NEXT_PUBLIC_BUILDER_API_KEY) {
-    try {
-      // Add Builder.io initialization
-      const { initializeNodeRuntime } = await import(
-        "@builder.io/sdk-react/node/init"
-      );
-      initializeNodeRuntime();
-
-      // Fetch Builder.io content for homepage
-      builderContent = await fetchOneEntry({
-        apiKey: process.env.NEXT_PUBLIC_BUILDER_API_KEY,
-        model: "page",
-        userAttributes: { urlPath: "/" },
-      });
-    } catch (error) {
-      console.warn("Builder.io content could not be loaded:", error);
-    }
-  }
+  // Fetch Builder.io content for homepage
+  const builderContent = await fetchOneEntry({
+    apiKey: process.env.NEXT_PUBLIC_BUILDER_API_KEY!,
+    model: "page",
+    userAttributes: { urlPath: "/" },
+  });
   const featuredCupcakes = [
     {
       id: 1,
@@ -82,15 +73,14 @@ export default async function Home() {
   return (
     <div>
       {/* Builder.io dynamic content */}
-      {process.env.NEXT_PUBLIC_BUILDER_API_KEY &&
-        (builderContent || isPreviewing() || isEditing()) && (
-          <Content
-            apiKey={process.env.NEXT_PUBLIC_BUILDER_API_KEY}
-            model="page"
-            content={builderContent}
-            customComponents={customComponents}
-          />
-        )}
+      {(builderContent || isPreviewing() || isEditing()) && (
+        <Content
+          apiKey={process.env.NEXT_PUBLIC_BUILDER_API_KEY!}
+          model="page"
+          content={builderContent}
+          customComponents={customComponents}
+        />
+      )}
       {/* Hero Section */}
       <HeroSection
         title="Delicious Cupcakes Made with"
