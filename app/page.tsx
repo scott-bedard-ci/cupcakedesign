@@ -12,18 +12,27 @@ import {
 import { customComponents } from "../builder-registry";
 
 export default async function Home() {
-  // Add Builder.io initialization
-  const { initializeNodeRuntime } = await import(
-    "@builder.io/sdk-react/node/init"
-  );
-  initializeNodeRuntime();
+  let builderContent = null;
 
-  // Fetch Builder.io content for homepage
-  const builderContent = await fetchOneEntry({
-    apiKey: process.env.NEXT_PUBLIC_BUILDER_API_KEY!,
-    model: "page",
-    userAttributes: { urlPath: "/" },
-  });
+  // Only initialize Builder.io if API key is present
+  if (process.env.NEXT_PUBLIC_BUILDER_API_KEY) {
+    try {
+      // Add Builder.io initialization
+      const { initializeNodeRuntime } = await import(
+        "@builder.io/sdk-react/node/init"
+      );
+      initializeNodeRuntime();
+
+      // Fetch Builder.io content for homepage
+      builderContent = await fetchOneEntry({
+        apiKey: process.env.NEXT_PUBLIC_BUILDER_API_KEY,
+        model: "page",
+        userAttributes: { urlPath: "/" },
+      });
+    } catch (error) {
+      console.warn("Builder.io content could not be loaded:", error);
+    }
+  }
   const featuredCupcakes = [
     {
       id: 1,
