@@ -72,6 +72,15 @@ export default async function Home() {
 
   return (
     <div>
+      {/* Builder.io dynamic content */}
+      {(builderContent || isPreviewing() || isEditing()) && (
+        <Content
+          apiKey={process.env.NEXT_PUBLIC_BUILDER_API_KEY!}
+          model="page"
+          content={builderContent}
+          customComponents={customComponents}
+        />
+      )}
       {/* Hero Section */}
       <HeroSection
         title="Delicious Cupcakes Made with"
