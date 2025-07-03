@@ -1,4 +1,4 @@
-import { withBuilderDevTools } from "@builder.io/dev-tools/next";
+const withBuilderDevTools = require("@builder.io/dev-tools/next")();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
