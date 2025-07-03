@@ -1,3 +1,5 @@
+import { withBuilderDevTools } from "@builder.io/dev-tools/next";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -9,6 +11,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+};
 
-export default nextConfig
+export default withBuilderDevTools(nextConfig);
