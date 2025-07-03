@@ -1,5 +1,3 @@
-const withBuilderDevTools = require("@builder.io/dev-tools/next")();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -13,4 +11,4 @@ const nextConfig = {
   },
 };
 
-export default withBuilderDevTools(nextConfig);
+export default nextConfig;
